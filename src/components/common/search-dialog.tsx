@@ -72,6 +72,20 @@ export function SearchDialog() {
               </CommandItem>
             ))}
           </CommandGroup>
+          <CommandGroup heading="예제">
+            {siteConfig.examples.map((item) => (
+              <CommandItem
+                key={item.href}
+                onSelect={() => {
+                  setOpen(false)
+                  router.push(item.href)
+                }}
+              >
+                <item.icon />
+                {item.title}
+              </CommandItem>
+            ))}
+          </CommandGroup>
         </CommandList>
       </Command>
     </CommandDialog>
