@@ -7,12 +7,14 @@ import {
   useBoolean,
   useCopyToClipboard,
   useDebounceValue,
+  useIsClient,
   useMediaQuery,
 } from "usehooks-ts"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Skeleton } from "@/components/ui/skeleton"
 
 // useDebounceValue: 입력이 멈춘 뒤에만 값이 갱신된다 (검색 API 호출 최적화 등)
 export function DebounceDemo() {
@@ -62,12 +64,16 @@ export function ClipboardDemo() {
 
 // useMediaQuery: 화면 크기·사용자 설정에 반응한다 (SSR에선 initializeWithValue: false 필수)
 export function MediaQueryDemo() {
+  const isClient = useIsClient()
   const isDesktop = useMediaQuery("(min-width: 768px)", {
     initializeWithValue: false,
   })
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)", {
     initializeWithValue: false,
   })
+
+  // 마운트 전에는 실제 값을 알 수 없으므로, 틀린 값 대신 스켈레톤을 보여준다
+  if (!isClient) return <Skeleton className="h-12 w-full" />
 
   return (
     <div className="flex flex-wrap gap-2 text-sm">

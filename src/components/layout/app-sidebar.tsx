@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Settings, Users } from "lucide-react"
 
 import { Logo } from "@/components/common/logo"
 import {
@@ -16,34 +15,34 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar"
-
-const items = [
-  { title: "개요", href: "/dashboard", icon: LayoutDashboard },
-  { title: "사용자", href: "/dashboard/users", icon: Users },
-  { title: "설정", href: "/dashboard/settings", icon: Settings },
-]
+import { siteConfig } from "@/config/site"
 
 // 대시보드 사이드바 — shadcn Sidebar(접기/모바일 Sheet 내장) 활용
 export function AppSidebar() {
   const pathname = usePathname()
+  const { setOpenMobile } = useSidebar()
+
+  // 모바일에서는 사이드바가 Sheet로 열리므로, 이동 후 직접 닫아준다
+  const closeMobile = () => setOpenMobile(false)
 
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-4 py-3">
-        <Logo />
+        <Logo onClick={closeMobile} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>메뉴</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {siteConfig.dashboardNav.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     isActive={pathname === item.href}
                     tooltip={item.title}
-                    render={<Link href={item.href} />}
+                    render={<Link href={item.href} onClick={closeMobile} />}
                   >
                     <item.icon />
                     <span>{item.title}</span>

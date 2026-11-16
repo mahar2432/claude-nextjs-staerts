@@ -6,6 +6,8 @@ import {
   Home,
   LayoutDashboard,
   Mail,
+  Settings,
+  Users,
   Wrench,
   type LucideIcon,
 } from "lucide-react"
@@ -30,6 +32,12 @@ export const siteConfig = {
     { title: "예제", href: "/examples", icon: BookOpen },
     { title: "대시보드", href: "/dashboard", icon: LayoutDashboard },
     { title: "문의하기", href: "/contact", icon: Mail },
+  ] satisfies NavItem[],
+  // 대시보드 사이드바 메뉴
+  dashboardNav: [
+    { title: "개요", href: "/dashboard", icon: LayoutDashboard },
+    { title: "사용자", href: "/dashboard/users", icon: Users },
+    { title: "설정", href: "/dashboard/settings", icon: Settings },
   ] satisfies NavItem[],
   // 예제 서브 페이지 목록 — 예제 홈 카드와 서브 내비게이션이 함께 사용한다
   examples: [
