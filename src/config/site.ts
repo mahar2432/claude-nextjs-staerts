@@ -5,6 +5,7 @@ import {
   FormInput,
   Home,
   LayoutDashboard,
+  LogIn,
   Mail,
   Settings,
   Users,
@@ -32,6 +33,7 @@ export const siteConfig = {
     { title: "예제", href: "/examples", icon: BookOpen },
     { title: "대시보드", href: "/dashboard", icon: LayoutDashboard },
     { title: "문의하기", href: "/contact", icon: Mail },
+    { title: "로그인", href: "/login", icon: LogIn },
   ] satisfies NavItem[],
   // 대시보드 사이드바 메뉴
   dashboardNav: [
